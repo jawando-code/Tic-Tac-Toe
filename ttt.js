@@ -1,144 +1,108 @@
- 
 
-const beginGame = (() => {
-    const markers = document.querySelector('.markers')
-    const btns = document.querySelectorAll(".btn");
-    const board = document.querySelector(".board")
-    const gameboard = new Array(9).fill("_",0);
-    let player1;
-    let player2;
-    btns.forEach((button)=> {
-            button.addEventListener('click', ()=> {
-                (() => {
-                markers.style.display = "none"
-                })()
-               
-                player1 = button.value;
+let humanMark;
+let botMark;
 
-                (()=>{
-                    if(player1 === 'x'){
-                        player2 = 'o';
-                    } else if(player1 === "o"){
-                        player2 = "x";
-                    }
-                })()
-                
-                
-            })
-        })
-    
-            
-     
-    
-
-    gameboard.forEach((item)=> {
-       
-        const inputSquare = document.createElement('button');
-        inputSquare.className = "input";
-        inputSquare.textContent = '';
-        board.append(inputSquare)
-       
-        inputSquare.addEventListener('click', ()=> {
-
-            const inputs = document.querySelectorAll('.input')
-            if(player1 === 'o' && inputSquare.textContent === "" ){
-                inputSquare.textContent = "o"
-                player2 = "x"
-            } else if(player1 === 'x' && inputSquare.textContent === ""){
-                inputSquare.textContent = "x"
-                player2 = "o"
-                console.log("click")
-            }
-            console.log("this is player 2" + player2)
-        })
-        
+const board = document.querySelector('.board')
+const startEvent = (()=>{
+    const start = document.querySelector("#start");
+    start.addEventListener('click', ()=> {
+        start.style.display = 'none';   
+        getNameMark();
     })
 
-})
-  let botMove = function (){
-             inputs[3].click();
-            if(player1 === 'o' && inputSquare.textContent === ''){
-                player2 = 'x'
-                inputSquare.textContent = 'x'
-               
-                console.log('human ' + player1, 'bot ' + player2);
-            }  else if(player1 === 'x' && inputSquare.textContent === ''){
-                player2 = 'o';
-                inputSquare.textContent = "o";
-                inputs[1].click();
-                console.log('human ' + player1, 'bot ' + player2);
-            }}  
-            
-const botResponse = () => {
-     const board = document.querySelector('.board');
-     const inputs = document.querySelectorAll('.input')
-    board.addEventListener("click", event => {
-     if(event.target !== event.currentTarget) {                
-      
-            
+})()
 
+const getNameMark = (()=>{
+    const nameEntry = document.querySelector(".nameEntry");
+    nameEntry.style.display = 'flex';
+    const playerName = document.querySelector('.playerName')
+    const submit = document.querySelector('#submit');
+        
+    submit.addEventListener('click', (event)=>{
+        event.preventDefault();
+        const getName = function(){
+                if(playerName.value === ''){
+                    playerName.value = "Player1"
+                } else {
+                    return playerName.value;
+                }
             }
 
-})}
-function createPlayer(name){
-const playerName = name;
-
-let score = 0;
-const getScore = () => score;
-const addScore = () => { score++; }
-console.log(name, score);
-
-
-return{ playerName, getScore, addScore}
-}
-
-
-let josh = createPlayer("Josh")
-let jaden = createPlayer("Jaden")
-
-jaden.getScore();
-jaden.addScore();
-beginGame();
-console.log({
-    playerName: jaden.playerName,
-    score: jaden.getScore()
+        getName();
+        
+       
+        nameEntry.style.display = 'none'
+        getMark();
+        });
+        const getMark = (()=> {
+            const xoSelctor = document.querySelector('.xoSelect')    
+            xoSelctor.style.display = 'flex';
+            xoSelctor.addEventListener('click',(event) =>{
+                    humanMark = event.target.value;
+                        if(humanMark === 'o'){
+                        botMark = 'x'
+                        } else if(humanMark === 'x'){
+                        botMark = "o";
+                        }
+                    
+                xoSelctor.style.display = 'none';
+                const guiName = document.querySelector('.guiName');
+                const div = document.createElement('div');
+                const symbol = document.createElement('div')
+                const symbol2 = document.createElement('div')
+                const div2 = document.createElement('div');
+                const symbolContainer = document.querySelector('.symbol')
+                div.textContent = playerName.value;
+                symbol.textContent = humanMark
+               symbol.classList = 'symbol'
+                div2.textContent = 'ai.Bot'
+                symbol2.textContent = botMark;
+                symbol2.classList = 'symbol'
+                symbolContainer.append(symbol,symbol2)
+                guiName.append(div,div2)
+                    board.style.display = 'grid';
+                    showGame();
+                })
+        })
 })
+    
 
-const play = (()=> {
-    console.log("Play")
-    const winlogic = () => {
-        if(x){
-            console.log(x)
+
+const showGame = (()=>{
+    let gameboard = [];
+
+    let rows = 3;
+    let columns = 3;
+
+    for(let i = 0; i < rows; i++){
+       newRow = [];
+       newRow.push(i);
+       gameboard.push(newRow )
+        for(let j = 0; j < columns; j++){
+            gameboard[i][j] = null;
         }
     }
-});
+   
+    gameboard.forEach((row)=>{
 
+        row.forEach((cell)=>{
+            const cellDiv = document.createElement('div');
+            cellDiv.classList.add('cell');
+            cellDiv.textContent = '';
+            board.append(cellDiv)
+        })
+    
+    })
+     gamePlay();
+     const gamePlay = (()=>{
 
+        
+     })  
+    
+})
 
-const newGame = (() => {
-    beginGame();
-    console.log("Points Reset. Starting New Game")
-    console.log();
-
+const gamePlay = (()=>{
+    
 
 })
 
-
-let clicker = function() {
-    const board = document.querySelector('.board');
-    const inputs = document.querySelectorAll(".input")
-    board.addEventListener("click",()=> {
-
-    inputs[0].click();
-    inputs[1].click();
-    inputs[4].click()
-    
-    console.log("Clicked")
-
-
-
-    })
-   
-}
-
-clicker();

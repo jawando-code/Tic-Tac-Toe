@@ -7,13 +7,31 @@
     <link rel="stylesheet" href="toe.css">
 </head>
 <body>
-    <h1>Tic Tac Toe</h1>
-    <div class="board"></div>
-    <div class="markers">
-        <button type="button" class="btn" value="x">x</button>
-        <button type="button" class="btn" value="o">o</button>
+    <div class="guiName">
+        </div>
+    <div class="symbol"></div>
+    <div class="container">
+        
+        <h1 class="header">tic-tac-toe</h1>
+        
+        <div class="board" style="display: none" ></div>
+        <div>
+            <button type="button" id="start">start</button>
+        </div>
+        <div class="nameEntry">
+            <label for="playerName">Enter name:</label>
+            <input type="text" class="playerName" for="playerName">
+            <button type="submit" id="submit" for="playerName">enter</button>
+        </div>
+
+        <div class="xoSelect">
+            <button type="button" class="btn" value="x">x</button>
+            <button type="button" class="btn" value="o">o</button>
+            
+        </div>
+        </div>
     </div>
- 
+    
     
 
 <script src='ttt.js' ></script>    
